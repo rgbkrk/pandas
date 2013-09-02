@@ -11271,6 +11271,7 @@ ENGINES = 'python', 'numexpr'
 
 class TestDataFrameQueryStrings(object):
     def check_str_query_method(self, parser, engine):
+        skip_if_no_ne()
         skip_if_no_pandas_parser(parser)
         df = DataFrame(randn(10, 1), columns=['b'])
         df['strings'] = Series(list('aabbccddee'))
@@ -11288,6 +11289,7 @@ class TestDataFrameQueryStrings(object):
             yield self.check_str_list_query_method, parser, engine
 
     def check_str_list_query_method(self, parser, engine):
+        skip_if_no_ne()
         skip_if_no_pandas_parser(parser)
         df = DataFrame(randn(10, 1), columns=['b'])
         df['strings'] = Series(list('aabbccddee'))
@@ -11316,6 +11318,7 @@ class TestDataFrameQueryStrings(object):
 
         res = df['["a", "b"] == strings']
         assert_frame_equal(res, expect)
+
 
 class TestDataFrameEvalNumExprPandas(unittest.TestCase):
     @classmethod
